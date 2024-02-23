@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой сайт</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'app/css/style.css' %}" />
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#">ShopName</a>
+            <div class="centered">
+                <a href="#">Новинки</a>
+                <a href="#">Мужское</a>
+                <a href="#">Женское</a>
+                <a href="#">Аксессуары</a>
+            </div>
+        </nav>
+    </header>
+    
+    {% block content %}{% endblock %}
+
+    <footer>
+        <p>&copy; 2024 ShopName inc.</p>
+    </footer>
+</body>
+</html>
