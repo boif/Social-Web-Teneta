@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+    <h2>Профиль пользователя</h2>
+    <p>Имя: {{ profile.user.username }}</p>
+    <p>Биография: {{ profile.bio }}</p>
+    <p>Возраст: {{ profile.age }}</p>
+
+    <h3>Друзья</h3>
+    <ul>
+    {% for friend in friends %}
+        <li>{{ friend.user.username }}</li>
+    {% empty %}
+        <li>У вас пока нет друзей.</li>
+    {% endfor %}
+    </ul>
+
+    <h3>Отправленные запросы</h3>
+    <ul>
+    {% for request in sent_requests %}
+        <li>{{ request.to_user.user.username }}</li>
+    {% empty %}
+        <li>Вы еще не отправляли запросов.</li>
+    {% endfor %}
+    </ul>
+
+    <h3>Полученные запросы</h3>
+    <ul>
+    {% for request in received_requests %}
+        <li>{{ request.from_user.user.username }}</li>
+    {% empty %}
+        <li>У вас пока нет полученных запросов.</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
