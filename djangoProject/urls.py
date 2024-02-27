@@ -23,5 +23,6 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('news/', views.news, name='news'),
     path('', views.home),
+    path('profile',views.profile_view)
     
 ]

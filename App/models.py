@@ -7,9 +7,10 @@ class Profile(models.Model):
     surname = models.CharField(max_length=255, blank=True)
     bio = models.TextField(blank=True)
     age = models.IntegerField(null=True)
+    friends = models.ManyToManyField('self',symmetrical=True,blank=True)
         
     def __str__(self):
-            return f"{self.user.username}'s Profile"
+        return f"{self.user.username}'s Profile"
 
 class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
@@ -38,3 +39,10 @@ class Group(models.Model):
 
     def __str__(self):
         return self.name
+
+class FriendRequest(models.Model):
+    from_user = models.ForeignKey(Profile, related_name='friend_requests_sent', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(Profile, related_name='friend_requests_received', on_delete=models.CASCADE)
+    is_accepted = models.BooleanField(default=False)
+    is_ignored = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now_add=True)
