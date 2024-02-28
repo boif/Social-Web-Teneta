@@ -1,8 +1,23 @@
-from django.shortcuts import render, redirect
+from typing import Any
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Profile, Message, Chat, Group, FriendRequest
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.views.generic.detail import DetailView
+
+class ShowProfilePageView(DetailView):
+    model = Profile 
+    template_name = 'profile.html'
+    context_object_name = 'profile'
+    
+    def get_context_data(self, *args ,**kwargs):
+        users = Profile.objects.all()
+        context = super(ShowProfilePageView,self).get_context_data(*args,**kwargs)
+        page_user = get_object_or_404(Profile, id=self.kwargs['pk'])
+        context['page_user'] = page_user
+        return context
+
 
 def home(request):
     return render(request, 'home.html')
