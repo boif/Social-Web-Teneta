@@ -4,13 +4,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
-def home(request):
-    return render(request, 'home.html')
-
-def news(request):
-    return render(request, 'news.html')
-
-
 @login_required
 def profile_view(request):
     profile = request.user.profile
