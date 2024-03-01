@@ -39,7 +39,7 @@
             <li><a href="/">Teneta</a></li>
             <li><a href="{% url 'news' %}">News</a></li>
             {% if user.is_authenticated %}
-            <li><a href="{% url 'profile_view' %}">Profile</a></li>
+            <li><a href="{% url 'user_profile' pk=user.profile.pk %}">Profile</a></li>
             {% endif %}
         </ul>
     </div>
