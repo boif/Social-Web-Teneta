@@ -22,16 +22,11 @@ body {
     margin-top: 0; /* Убираем отступ сверху */
 }
 
-.sidebar ul li {
-    padding: 1px;
-}
-
 .sidebar ul li a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
     display: block;
-    padding: 10px;
     text-align: center;
     word-wrap: break-word; /* Добавляем перенос для длинных слов */
 }
@@ -65,15 +60,14 @@ body {
 
 .sidebar-button {
     display: block;
-    margin-bottom: 10px; /* Добавить отступ между кнопками */
     color: #fff;
     background-color: #272727;
-    padding: 8px 16px;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold; /* Сделать текст жирным */
     border: none; /* Убрать края */
     font-size: 16px; /* Увеличить размер шрифта */
+    line-height: 44px;
 }
 
 .sidebar-button:hover {
