@@ -73,3 +73,48 @@ body {
 .sidebar-button:hover {
     background-color: #333;
 }
+
+.post-input {
+        border: 1px solid transparent; /* No border */
+        border-radius: 5px; /* Rounded corners */
+        padding: 10px; /* Padding around the text */
+        background-color: #333; /* Dark background */
+        color: #fff; /* White text */
+        width: 70%; /* 70% of page width */
+        box-sizing: border-box; /* Include padding and border in the width */
+        outline: none; /* Remove focus outline */
+    }
+
+    /* Style for the browse file button */
+.browse-file-btn, .create-post-btn {
+    background-color: #5a8fbf; /* Pastel blue background */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Cursor style */
+    transition: background-color 0.3s; /* Smooth transition */
+    font-size: 14px; /* Font size */
+    display: inline-block; /* добавляем эту строку */
+    height: 33px; /* высота кнопки */
+    line-height: 33px; /* добавляем эту строку */
+    margin-right: 5px;
+}
+
+/* Change background color on hover */
+.browse-file-btn:hover, .create-post-btn:hover {
+    background-color: #5a8fbf; /* Darker shade of pastel blue */
+}
+
+    /* Hide default file input appearance */
+.file-input {
+    display: none;
+}
+
+.create-post-btn {
+    display: none; /* изначально скрываем кнопку */
+}
+
+.file-upload {
+    display: flex; /* Используем flexbox */
+    align-items: center; /* Выравниваем элементы по вертикали */
+}
