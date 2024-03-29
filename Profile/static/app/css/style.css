@@ -81,6 +81,7 @@ body {
         width: 550px;
         box-sizing: border-box; /* Include padding and border in the width */
         outline: none; /* Remove focus outline */
+        resize: none;
     }
 
     /* Style for the browse file button */
@@ -184,4 +185,64 @@ body {
 
 .menu:hover .dropdown-content {
     display: block;
+}
+
+.comment-input-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.comment-text {
+    margin-top: -20px;
+    flex: 1;
+    height: 30px; /* Высота текстового поля */
+    resize: none;
+    border-radius: 5px; /* Скругленные края textarea */
+    align-items: flex-start; /* Прижимаем к низу */
+    max-width: 100%; /* Максимальная ширина текстового поля равна ширине родительского контейнера */
+    word-wrap: break-word; /* Перенос слов на новую строку при необходимости */
+}
+
+.comment-btn {
+    width: 80px; /* Ширина кнопки Send */
+    height: 38px; /* Высота кнопки Send, должна совпадать с высотой текстового поля */
+    background-color: #333; /* Цвет фона кнопки */
+    color: #fff; /* Цвет текста кнопки */
+    border: none; /* Убираем границу кнопки */
+    border-radius: 5px; /* Скругленные края кнопки */
+    cursor: pointer; /* Курсор при наведении на кнопку */
+    margin-left: 10px; /* Отступ слева от textarea */
+}
+
+.comment-divider {
+    border: none;
+    border-top: 1px solid #2b2b2b; /* Цвет разделительной полосы */
+    margin: 0px 0; /* Отступы от комментариев */
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-user {
+    font-weight: bold; /* Жирный шрифт для имени пользователя */
+}
+
+.comment-date {
+    font-size: smaller;
+    color: #666;
+    margin-top: 10px; /* Отступ между текстом комментария и датой */
+}
+
+.comment-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.comment-input {
+    align-self: flex-end; /* Прижать textarea к левому краю */
 }

@@ -37,8 +37,140 @@
                     {% endif %}
                 {% endif %}
             </div>
+            <div class="post-actions">
+                <button class="like-btn" data-post-id="{{ post.id }}">Like</button>
+                <span class="like-count">Likes: {{ post.likes.count }}</span>
+                <!-- Кнопка и счетчик лайков -->
+            </div>
+            <!-- Раздел комментариев -->
+            <div class="comments-section">
+                {% for comment in post.comment_set.all %}
+                    <div class="comment" style="display: {% if forloop.counter <= 2 %}flex{% else %}none{% endif %};">
+                        <div class="comment-content">
+                            <p class="comment-user">{{ comment.user.username }}</p>
+                            <p class="comment-text">{{ comment.text }}</p>
+                            <p class="comment-date">{{ comment.created_at|date:"d.m.Y H:i" }}</p>
+                        </div>
+                    </div>
+                    <hr class="comment-divider">
+                {% endfor %}
+                <!-- Форма для добавления комментария -->
+                <form class="comment-form" method="post" data-post-id="{{ post.id }}">
+                    {% csrf_token %}
+                    <div class="comment-input-wrapper">
+                        <textarea class="comment-input comment-text" name="text" placeholder="Write your comment here"></textarea>
+                        <button type="submit" class="comment-btn" disabled>Send</button>
+                    </div>
+                </form>
+                {% if post.comment_set.count > 2 %}
+                    <button class="show-comments-btn">Show all comments</button>
+                {% endif %}
+                 <button class="hide-comments-btn" style="display: none;">Hide comments</button>
+            </div>
         </div>
     {% endfor %}
 </div>
+
+<script>
+    // AJAX для лайков
+    document.querySelectorAll('.like-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const postId = btn.getAttribute('data-post-id');
+            fetch(`/like/${postId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            }).then(response => {
+                if (response.ok) {
+                    // Обновление счетчика лайков на странице
+                    response.json().then(data => {
+                        const likeCountElement = btn.nextElementSibling;
+                        likeCountElement.textContent = `Likes: ${data.likes}`;
+                    });
+                }
+            });
+        });
+    });
+
+    // AJAX для комментариев
+    document.querySelectorAll('.comment-form').forEach(form => {
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const postId = form.getAttribute('data-post-id');
+            const formData = new FormData(form);
+            fetch(`/comment/${postId}/`, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            }).then(response => {
+                if (response.ok) {
+                    // Очистка текстового поля после успешной отправки комментария
+                    form.querySelector('.comment-text').value = '';
+                    // Перезагрузка страницы после добавления комментария
+                    location.reload();
+                }
+            });
+        });
+    });
+
+    
+    document.querySelectorAll('.comment-text').forEach(textarea => {
+        textarea.addEventListener('input', () => {
+            const commentBtn = textarea.nextElementSibling;
+            if (textarea.value.trim() === '') {
+                commentBtn.disabled = true; // Если поле пустое, кнопка блокируется
+            } else {
+                commentBtn.disabled = false; // Если в поле есть текст, кнопка становится активной
+            }
+        });
+    });
+    
+    // Находим все кнопки "Show all comments"
+    document.querySelectorAll('.show-comments-btn').forEach(btn => {
+        // Добавляем обработчик события на каждую кнопку
+        btn.addEventListener('click', () => {
+            // Находим родительский элемент кнопки, который содержит все комментарии
+            const commentsSection = btn.closest('.comments-section');
+            // Находим все комментарии внутри секции
+            const comments = commentsSection.querySelectorAll('.comment');
+            // Проходимся по всем комментариям
+            comments.forEach(comment => {
+                // Показываем каждый комментарий
+                comment.style.display = 'flex';
+            });
+            // Скрываем кнопку "Show all comments"
+            btn.style.display = 'none';
+            // Показываем кнопку "Hide comments"
+            commentsSection.querySelector('.hide-comments-btn').style.display = 'block';
+        });
+    });
+    
+    // Находим все кнопки "Hide comments"
+    document.querySelectorAll('.hide-comments-btn').forEach(btn => {
+        // Добавляем обработчик события на каждую кнопку
+        btn.addEventListener('click', () => {
+            // Находим родительский элемент кнопки, который содержит все комментарии
+            const commentsSection = btn.closest('.comments-section');
+            // Находим все комментарии внутри секции
+            const comments = commentsSection.querySelectorAll('.comment');
+            // Проходимся по всем комментариям
+            for (let i = 0; i < comments.length; i++) {
+                // Скрываем комментарии, начиная с третьего
+                if (i >= 2) {
+                    comments[i].style.display = 'none';
+                }
+            }
+            // Скрываем кнопку "Hide comments"
+            btn.style.display = 'none';
+            // Показываем кнопку "Show all comments"
+            commentsSection.querySelector('.show-comments-btn').style.display = 'block';
+        });
+    });
+    
+</script>
+
 
 {% endblock %}
