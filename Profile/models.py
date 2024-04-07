@@ -12,4 +12,4 @@ class Profile(models.Model):
 
 class Subscription(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscriptions')
-    subscribed_to = models.ForeignKey(ser, on_delete=models.CASCADE, related_name='subscribers')
+    subscribed_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscribers')
