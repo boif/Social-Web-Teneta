@@ -1,10 +1,8 @@
-from datetime import datetime
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from Profile import views, forms
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('signup/', views.signup, name='signup'),
@@ -16,6 +14,9 @@ urlpatterns = [
          ),
          name='login'),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
+    path('profile/<str:username>/', views.profile, name='profile'),
+    path('subscribe/<str:username>/', views.subscribe, name='subscribe'),
+    path('unsubscribe/<str:username>/', views.unsubscribe, name='unsubscribe'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
