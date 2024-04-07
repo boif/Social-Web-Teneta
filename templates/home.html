@@ -62,6 +62,7 @@
                     <hr class="comment-divider">
                 {% endfor %}
                 <!-- Форма для добавления комментария -->
+                {% if user.is_authenticated %}
                 <form class="comment-form" method="post" data-post-id="{{ post.id }}">
                     {% csrf_token %}
                     <div class="comment-input-wrapper">
@@ -73,6 +74,7 @@
                     <button class="show-comments-btn">Show all comments</button>
                 {% endif %}
                  <button class="hide-comments-btn" style="display: none;">Hide comments</button>
+                {% endif %}
             </div>
         </div>
     {% endfor %}
