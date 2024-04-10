@@ -28,8 +28,11 @@ def signup(request):
 
 def profile(request, username):
     user = User.objects.get(username=username)
-    posts = Post.objects.filter(author=user.id)
+    posts = Post.objects.filter(author=user)  # Убрано использование .id
     profile = user.profile
+    is_subscribed = False  # По умолчанию не подписан
+    if request.user.is_authenticated:
+        is_subscribed = Subscription.objects.filter(user=request.user, subscribed_to=user).exists()
     return render(
         request,
         "profile.html",
@@ -37,22 +40,23 @@ def profile(request, username):
             'username': user.username,
             'profile_pic': profile.profile_pic.url,
             'description': profile.description,
-            'posts': posts
+            'posts': posts,
+            'is_subscribed': is_subscribed,
         }
     )
 
 @login_required()
-def subscribe(request, user_id):
+def subscribe(request, username):
     if request.method == 'POST':
-        subscribed_to_user = Subscription.objects.get(pk=user_id)
-        Subscription.objects.create(user=request.user, subscribe_to=subscribed_to_user)
-        return redirect('profile', user_id=user_id)
+        subscribed_to_user = User.objects.get(username=username)
+        Subscription.objects.create(user=request.user, subscribed_to=subscribed_to_user)
+        return redirect('profile', username=subscribed_to_user.username)
     return redirect('home')
 
 @login_required()
-def unsubscribe(request, user_id):
+def unsubscribe(request, username):
     if request.method == 'POST':
-        subscribed_from_user = Subscription.objects.get(pk=user_id)
-        Subscription.objects.filter(user=subscribed_from_user, subscribe_to=subscribed_from_user).delete()
-        return redirect('profile', user_id=user_id)
+        subscribed_to_user = User.objects.get(username=username)
+        Subscription.objects.filter(user=request.user, subscribed_to=subscribed_to_user).delete()
+        return redirect('profile', username=subscribed_to_user.username)
     return redirect('home')
