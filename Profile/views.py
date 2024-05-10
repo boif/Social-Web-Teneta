@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from Profile.models import Subscription
 from News.models import Post
+from News.forms import PostForm
 
 
 def signup(request):
@@ -28,11 +29,17 @@ def signup(request):
 
 def profile(request, username):
     user = User.objects.get(username=username)
-    posts = Post.objects.filter(author=user)  # Убрано использование .id
+    posts = Post.objects.filter(author=user).order_by('-date')
     profile = user.profile
-    is_subscribed = False  # По умолчанию не подписан
+    is_subscribed = False
     if request.user.is_authenticated:
         is_subscribed = Subscription.objects.filter(user=request.user, subscribed_to=user).exists()
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
     return render(
         request,
         "profile.html",
