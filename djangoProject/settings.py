@@ -82,7 +82,11 @@ WSGI_APPLICATION = 'djangoProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'TenetaDB',
+        'USER': 'postgres',
+        'PASSWORD': '12345',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
