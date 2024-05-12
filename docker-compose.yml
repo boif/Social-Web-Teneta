@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: TenetaDB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+
+
+  web:
+    build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
