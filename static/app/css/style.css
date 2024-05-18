@@ -251,3 +251,19 @@ body {
     vertical-align: middle; /* Выравниваем по вертикали по центру */
     margin-right: 5px; /* Добавляем небольшой отступ между аватаром и именем пользователя */
 }
+
+.subscribe-btn, .unsubscribe-btn {
+    background-color: #5a8fbf;
+    color: white; /* Белый цвет текста */
+    border: none; /* Убираем границу */
+    padding: 10px 20px; /* Отступы внутри кнопки */
+    font-size: 16px; /* Размер шрифта */
+    border-radius: 5px; /* Скругленные углы */
+    cursor: pointer; /* Указатель курсора при наведении */
+    transition: background-color 0.3s; /* Плавный переход цвета фона */
+    margin-bottom: 20px;
+}
+
+.subscribe-btn:hover {
+    background-color: #0056b3; /* Темно-голубой цвет при наведении */
+}

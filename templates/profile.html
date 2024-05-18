@@ -11,40 +11,26 @@
                 <div class="text-center" id="author">
                     <img src="{{ MEDIA_URL }}{{ profile_pic }}" alt="AVATAR" height=292.5 width=292.5>
                     <h3>{{ username }}</h3>
-                    <h3>{{ description }}</h3>
+                    <button id="subscribe-btn" data-username="{{ username }}" class="subscribe-btn" {% if user.is_authenticated and user.username != username and not is_subscribed %}style="display: block;"{% else %}style="display: none;"{% endif %}>Subscribe</button>
+                    <button id="unsubscribe-btn" data-username="{{ username }}" class="unsubscribe-btn" {% if user.is_authenticated and user.username != username and is_subscribed %}style="display: block;"{% else %}style="display: none;"{% endif %}>Unsubscribe</button>
                     {% if request.user.is_authenticated %}
-                        {% if username != request.user.username %}
-                            {% if not is_subscribed %}
-                                <form method="post" action="{% url 'subscribe' username=username %}">
+                        {% if username == request.user.username %}
+                            <div class="create-post">
+                                <form id="post-form" method="post" enctype="multipart/form-data">
                                     {% csrf_token %}
-                                    <button type="submit">Subscribe</button>
+                                    <textarea id="post-text" name="text" class="post-input" placeholder="Enter your post text"></textarea>
+                                    <div class="file-upload">
+                                        <label for="file-input" class="browse-file-btn">
+                                            <img src="{% static 'app/images/files.png' %}" alt="File icon" width="15" height="15" style="vertical-align: middle;">
+                                        </label>
+                                        <input type="file" id="file-input" name="content" class="file-input">
+                                        <button type="submit" id="create-post-btn" class="create-post-btn" style="display: none;">Create Post</button>
+                                    </div>
                                 </form>
-                            {% else %}
-                                <form method="post" action="{% url 'unsubscribe' username=username %}">
-                                    {% csrf_token %}
-                                    <button type="submit">Unsubscribe</button>
-                                </form>
-                            {% endif %}
+                            </div>
                         {% endif %}
                     {% endif %}
                 </div>
-                {% if request.user.is_authenticated %}
-                    {% if username == request.user.username %}
-                        <div class="create-post">
-                            <form id="post-form" method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <textarea id="post-text" name="text" class="post-input" placeholder="Enter your post text"></textarea>
-                                <div class="file-upload">
-                                    <label for="file-input" class="browse-file-btn">
-                                        <img src="{% static 'app/images/files.png' %}" alt="File icon" width="15" height="15" style="vertical-align: middle;">
-                                    </label>
-                                    <input type="file" id="file-input" name="content" class="file-input">
-                                    <button type="submit" id="create-post-btn" class="create-post-btn" style="display: none;">Create Post</button>
-                                </div>
-                            </form>
-                        </div>
-                    {% endif %}
-                {% endif %}
                 <div class="posts">
                     {% for post in posts %}
                         <div class="post">
@@ -201,6 +187,39 @@
                             btn.style.display = 'none';
                             // Показываем кнопку "Show all comments"
                             commentsSection.querySelector('.show-comments-btn').style.display = 'block';
+                        });
+                    });
+
+                    document.getElementById('subscribe-btn').addEventListener('click', function() {
+                        const username = this.getAttribute('data-username');
+                        fetch(`/subscribe/${username}/`, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRFToken': '{{ csrf_token }}',
+                            },
+                        }).then(response => {
+                            if (response.ok) {
+                                // После успешной подписки скрываем кнопку подписки и показываем кнопку отписки
+                                document.getElementById('subscribe-btn').style.display = 'none';
+                                document.getElementById('unsubscribe-btn').style.display = 'block';
+                            }
+                        });
+                    });
+
+                    // AJAX для отписки от пользователя
+                    document.getElementById('unsubscribe-btn').addEventListener('click', function() {
+                        const username = this.getAttribute('data-username');
+                        fetch(`/unsubscribe/${username}/`, {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRFToken': '{{ csrf_token }}',
+                            },
+                        }).then(response => {
+                            if (response.ok) {
+                                // После успешной отписки скрываем кнопку отписки и показываем кнопку подписки
+                                document.getElementById('unsubscribe-btn').style.display = 'none';
+                                document.getElementById('subscribe-btn').style.display = 'block';
+                            }
                         });
                     });
 

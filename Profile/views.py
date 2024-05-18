@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect
 from Profile.forms import RegisterForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from Profile.models import Subscription
+from django.http import JsonResponse
 from News.models import Post
 from News.forms import PostForm
-
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 def signup(request):
     if request.method == 'POST':
@@ -27,19 +28,19 @@ def signup(request):
         },
     )
 
+
 def profile(request, username):
     user = User.objects.get(username=username)
-    posts = Post.objects.filter(author=user).order_by('-date')
+    posts = Post.objects.filter(author=user.id).order_by('-date')
     profile = user.profile
-    is_subscribed = False
-    if request.user.is_authenticated:
-        is_subscribed = Subscription.objects.filter(user=request.user, subscribed_to=user).exists()
+    is_subscribed = request.user.profile.subscription.filter(user=user).exists() if request.user.is_authenticated else False
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            post = form.save(commit=False)
+            post = form.save(commit = False)
             post.author = request.user
             post.save()
+            return HttpResponseRedirect(reverse('profile', args = [request.user.username]))
     return render(
         request,
         "profile.html",
@@ -48,22 +49,18 @@ def profile(request, username):
             'profile_pic': profile.profile_pic.url,
             'description': profile.description,
             'posts': posts,
-            'is_subscribed': is_subscribed,
+            'is_subscribed': is_subscribed
         }
     )
 
-@login_required()
+@login_required
 def subscribe(request, username):
-    if request.method == 'POST':
-        subscribed_to_user = User.objects.get(username=username)
-        Subscription.objects.create(user=request.user, subscribed_to=subscribed_to_user)
-        return redirect('profile', username=subscribed_to_user.username)
-    return redirect('home')
+    user_to_subscribe = User.objects.get(username=username)
+    request.user.profile.subscription.add(user_to_subscribe.profile)
+    return JsonResponse({'success': True})
 
-@login_required()
+@login_required
 def unsubscribe(request, username):
-    if request.method == 'POST':
-        subscribed_to_user = User.objects.get(username=username)
-        Subscription.objects.filter(user=request.user, subscribed_to=subscribed_to_user).delete()
-        return redirect('profile', username=subscribed_to_user.username)
-    return redirect('home')
+    user_to_unsubscribe = User.objects.get(username=username)
+    request.user.profile.subscription.remove(user_to_unsubscribe.profile)
+    return JsonResponse({'success': True})
