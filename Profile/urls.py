@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from Profile import views, forms
+from News.views import createPost
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
