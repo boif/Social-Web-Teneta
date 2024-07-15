@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from News.models import Post
+from Profile.models import Profile
 from News.forms import PostForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -20,6 +21,7 @@ def signup(request):
             return redirect('/login/')
     else:
         form = RegisterForm()
+
     return render(
         request,
         'registration/signup.html',
@@ -34,6 +36,21 @@ def profile(request, username):
     posts = Post.objects.filter(author=user.id).order_by('-date')
     profile = user.profile
     is_subscribed = request.user.profile.subscription.filter(user=user).exists() if request.user.is_authenticated else False
+    subscribed = profile.subscription.all()  # Users who follow this profile
+    subscribers = Profile.objects.filter(subscription = user.profile)  # Users whom this profile follows
+    subscribers_count = subscribers .count()
+    subscribed_count = subscribed.count()
+
+    if request.method == "POST":
+        if 'subscribe' in request.POST:
+            # Code for subscribing
+            subscriber = request.user.profile
+            profile.subscription.add(subscriber)
+        elif 'unsubscribe' in request.POST:
+            # Code for unsubscribing
+            subscriber = request.user.profile
+            profile.subscription.remove(subscriber)
+
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -41,6 +58,7 @@ def profile(request, username):
             post.author = request.user
             post.save()
             return HttpResponseRedirect(reverse('profile', args = [request.user.username]))
+
     return render(
         request,
         "profile.html",
@@ -49,7 +67,11 @@ def profile(request, username):
             'profile_pic': profile.profile_pic.url,
             'description': profile.description,
             'posts': posts,
-            'is_subscribed': is_subscribed
+            'is_subscribed': is_subscribed,
+            'subscribers': subscribers,
+            'subscribed': subscribed,
+            'subscribers_count': subscribers_count,
+            'subscribed_count': subscribed_count,
         }
     )
 
@@ -57,10 +79,18 @@ def profile(request, username):
 def subscribe(request, username):
     user_to_subscribe = User.objects.get(username=username)
     request.user.profile.subscription.add(user_to_subscribe.profile)
-    return JsonResponse({'success': True})
+
+    return JsonResponse({
+        'success': True,
+        'username': user_to_subscribe.username
+    })
 
 @login_required
 def unsubscribe(request, username):
     user_to_unsubscribe = User.objects.get(username=username)
     request.user.profile.subscription.remove(user_to_unsubscribe.profile)
-    return JsonResponse({'success': True})
+
+    return JsonResponse({
+        'success': True,
+        'username': user_to_unsubscribe.username
+    })

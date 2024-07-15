@@ -13,6 +13,22 @@
                     <h3>{{ username }}</h3>
                     <button id="subscribe-btn" data-username="{{ username }}" class="subscribe-btn" {% if user.is_authenticated and user.username != username and not is_subscribed %}style="display: block;"{% else %}style="display: none;"{% endif %}>Subscribe</button>
                     <button id="unsubscribe-btn" data-username="{{ username }}" class="unsubscribe-btn" {% if user.is_authenticated and user.username != username and is_subscribed %}style="display: block;"{% else %}style="display: none;"{% endif %}>Unsubscribe</button>
+
+                    <p>Subscribers: <span id="subscriber-count">{{ subscribers_count }}</span></p>
+                    <div class="followers-avatars">
+                        {% for subscriber in subscribers %}
+                            <img src="{{ subscriber.profile_pic.url }}" class="avatar-img" width="50" height="50">
+                        {% endfor %}
+                    </div>
+
+                    <p>Subscribed: <span id="subscribed-count">{{ subscribed_count }}</span></p>
+                    <div class="following-avatars">
+                        {% for subscribe in subscribed %}
+                            <img src="{{ subscribe.profile_pic.url }}" class="avatar-img" width="50" height="50">
+                        {% endfor %}
+                    </div>
+
+
                     {% if request.user.is_authenticated %}
                         {% if username == request.user.username %}
                             <div class="create-post">
@@ -190,39 +206,72 @@
                         });
                     });
 
-                    document.getElementById('subscribe-btn').addEventListener('click', function() {
-                        const username = this.getAttribute('data-username');
-                        fetch(`/subscribe/${username}/`, {
-                            method: 'POST',
-                            headers: {
-                                'X-CSRFToken': '{{ csrf_token }}',
-                            },
-                        }).then(response => {
-                            if (response.ok) {
-                                // После успешной подписки скрываем кнопку подписки и показываем кнопку отписки
-                                document.getElementById('subscribe-btn').style.display = 'none';
-                                document.getElementById('unsubscribe-btn').style.display = 'block';
-                            }
-                        });
-                    });
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const subscribeBtn = document.getElementById('subscribe-btn');
+                        const unsubscribeBtn = document.getElementById('unsubscribe-btn');
+                        const subscriberCountElement = document.getElementById('subscriber-count');
+                        const followersAvatars = document.querySelector('.followers-avatars');
 
-                    // AJAX для отписки от пользователя
-                    document.getElementById('unsubscribe-btn').addEventListener('click', function() {
-                        const username = this.getAttribute('data-username');
-                        fetch(`/unsubscribe/${username}/`, {
-                            method: 'POST',
-                            headers: {
-                                'X-CSRFToken': '{{ csrf_token }}',
-                            },
-                        }).then(response => {
-                            if (response.ok) {
-                                // После успешной отписки скрываем кнопку отписки и показываем кнопку подписки
-                                document.getElementById('unsubscribe-btn').style.display = 'none';
-                                document.getElementById('subscribe-btn').style.display = 'block';
-                            }
-                        });
-                    });
+                        if (subscribeBtn) {
+                            subscribeBtn.addEventListener('click', () => {
+                                const username = subscribeBtn.getAttribute('data-username');
+                                fetch(`/subscribe/${username}/`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'X-CSRFToken': '{{ csrf_token }}',
+                                    },
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        const currentSubscriberCount = parseInt(subscriberCountElement.textContent);
+                                        subscriberCountElement.textContent = currentSubscriberCount + 1;
 
+                                        const newAvatar = document.createElement('img');
+                                        newAvatar.src = '{{ request.user.profile.profile_pic.url }}'; // Используем аватарку текущего пользователя
+                                        newAvatar.alt = '{{ request.user.username }}';
+                                        newAvatar.classList.add('avatar-img');
+                                        newAvatar.width = 50;
+                                        newAvatar.height = 50;
+                                        newAvatar.setAttribute('data-username', '{{ request.user.username }}');
+                                        followersAvatars.appendChild(newAvatar);
+
+                                        subscribeBtn.style.display = 'none';
+                                        unsubscribeBtn.style.display = 'block';
+                                    }
+                                });
+                            });
+                        }
+/// fix unsub from subscribers list
+                        if (unsubscribeBtn) {
+                            unsubscribeBtn.addEventListener('click', () => {
+                                const username = unsubscribeBtn.getAttribute('data-username');
+                                fetch(`/unsubscribe/${username}/`, {
+                                    method: 'POST',
+                                    headers: {
+                                        'X-CSRFToken': '{{ csrf_token }}',
+                                    },
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        const currentSubscriberCount = parseInt(subscriberCountElement.textContent);
+                                        subscriberCountElement.textContent = currentSubscriberCount - 1;
+
+                                        // Находим и удаляем аватарку текущего пользователя из списка подписчиков
+                                        const avatarToRemove = followersAvatars.querySelector(`img[data-username="${username}"]`);
+                                        if (avatarToRemove) {
+                                            avatarToRemove.remove();
+                                        }
+
+                                        unsubscribeBtn.style.display = 'none';
+                                        subscribeBtn.style.display = 'block';
+                                    }
+                                });
+                            });
+                        }
+
+                    });
                 </script>
             </div>
         </div>
