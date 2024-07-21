@@ -17,7 +17,7 @@
                     <p>Subscribers: <span id="subscriber-count">{{ subscribers_count }}</span></p>
                     <div class="followers-avatars">
                         {% for subscriber in subscribers %}
-                            <img src="{{ subscriber.profile_pic.url }}" class="avatar-img" width="50" height="50">
+                            <img src="{{ subscriber.profile_pic.url }}" class="avatar-img" width="50" height="50" data-username="{{ subscriber.username }}">
                         {% endfor %}
                     </div>
 
@@ -242,7 +242,7 @@
                                 });
                             });
                         }
-/// fix unsub from subscribers list
+
                         if (unsubscribeBtn) {
                             unsubscribeBtn.addEventListener('click', () => {
                                 const username = unsubscribeBtn.getAttribute('data-username');
@@ -259,9 +259,9 @@
                                         subscriberCountElement.textContent = currentSubscriberCount - 1;
 
                                         // Находим и удаляем аватарку текущего пользователя из списка подписчиков
-                                        const avatarToRemove = followersAvatars.querySelector(`img[data-username="${username}"]`);
+                                        const avatarToRemove = followersAvatars.querySelector(`img[data-username="{{ request.user.username }}"]`);
                                         if (avatarToRemove) {
-                                            avatarToRemove.remove();
+                                            followersAvatars.removeChild(avatarToRemove);
                                         }
 
                                         unsubscribeBtn.style.display = 'none';
@@ -270,7 +270,6 @@
                                 });
                             });
                         }
-
                     });
                 </script>
             </div>
