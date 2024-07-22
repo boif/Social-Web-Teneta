@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect , get_object_or_404
 from Profile.forms import RegisterForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -36,18 +36,16 @@ def profile(request, username):
     posts = Post.objects.filter(author=user.id).order_by('-date')
     profile = user.profile
     is_subscribed = request.user.profile.subscription.filter(user=user).exists() if request.user.is_authenticated else False
-    subscribed = profile.subscription.all()  # Users who follow this profile
-    subscribers = Profile.objects.filter(subscription = user.profile)  # Users whom this profile follows
+    subscribed = profile.subscription.all()
+    subscribers = Profile.objects.filter(subscription = user.profile)
     subscribers_count = subscribers .count()
     subscribed_count = subscribed.count()
 
     if request.method == "POST":
         if 'subscribe' in request.POST:
-            # Code for subscribing
             subscriber = request.user.profile
             profile.subscription.add(subscriber)
         elif 'unsubscribe' in request.POST:
-            # Code for unsubscribing
             subscriber = request.user.profile
             profile.subscription.remove(subscriber)
 
@@ -61,7 +59,7 @@ def profile(request, username):
 
     return render(
         request,
-        "profile.html",
+        "profile/profile.html",
         {
             'username': user.username,
             'profile_pic': profile.profile_pic.url,
@@ -94,3 +92,33 @@ def unsubscribe(request, username):
         'success': True,
         'username': user_to_unsubscribe.username
     })
+@login_required
+def subscribersPage(request, username):
+    user = get_object_or_404(User, username=username)
+    profile = user.profile
+    subscribers = Profile.objects.filter(subscription = user.profile)
+
+    return render(
+        request,
+        'profile/subscribers.html',
+        {
+            'profile': profile,
+            'subscribers': subscribers
+        }
+    )
+
+
+@login_required
+def subscribesPage(request, username):
+    user = get_object_or_404(User, username = username)
+    profile = user.profile
+    subscribes = Profile.subscription.all()
+
+    return render(
+        request,
+        'profile/subscribers.html',
+        {
+            'profile': profile,
+            'subscribess': subscribes
+        }
+    )
