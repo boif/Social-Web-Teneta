@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+{% load static %}
+
+<h1>{{ profile.user.username }}'s Subscribers</h1>
+  <ul>
+    {% for subscriber in subscribers %}
+      <li><a href="{% url 'profile' subscriber.user.username %}">{{ subscriber.user.username }}</a></li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}
