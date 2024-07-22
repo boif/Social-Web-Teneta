@@ -112,13 +112,13 @@ def subscribersPage(request, username):
 def subscribesPage(request, username):
     user = get_object_or_404(User, username = username)
     profile = user.profile
-    subscribes = Profile.subscription.all()
+    subscribes = profile.subscription.all()
 
     return render(
         request,
-        'profile/subscribers.html',
+        'profile/subscribes.html',
         {
             'profile': profile,
-            'subscribess': subscribes
+            'subscribes': subscribes
         }
     )
