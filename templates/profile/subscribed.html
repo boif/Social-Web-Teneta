@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>Profiles {{ profile.user.username }} is Subscribed To</h1>
+<ul>
+  {% for subscribed_profile in subscribed %}
+  <li>
+    <a href="{% url 'profile' subscribed_profile.user.username %}">
+      <img
+        src="{{ subscribed_profile.profile_pic.url }}"
+        alt="{{ subscribed_profile.user.username }}"
+        width="50"
+        height="50"
+      />
+      {{ subscribed_profile.user.username }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

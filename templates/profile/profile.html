@@ -14,14 +14,22 @@
                     <button id="subscribe-btn" data-username="{{ username }}" class="subscribe-btn" {% if user.is_authenticated and user.username != username and not is_subscribed %}style="display: block;"{% else %}style="display: none;"{% endif %}>Subscribe</button>
                     <button id="unsubscribe-btn" data-username="{{ username }}" class="unsubscribe-btn" {% if user.is_authenticated and user.username != username and is_subscribed %}style="display: block;"{% else %}style="display: none;"{% endif %}>Unsubscribe</button>
 
-                    <p>Subscribers: <span id="subscriber-count">{{ subscribers_count }}</span></p>
+                    <p>
+                      <a href="{% url 'subscribers' username %}" class="link-text">
+                        Subscribers: <span id="subscriber-count">{{ subscribers_count }}</span>
+                      </a>
+                    </p>
                     <div class="followers-avatars">
                         {% for subscriber in subscribers|slice:":5" %}
                             <img src="{{ subscriber.profile_pic.url }}" class="avatar-img" width="50" height="50" data-username="{{ subscriber.username }}">
                         {% endfor %}
                     </div>
 
-                    <p>Subscribed: <span id="subscribed-count">{{ subscribed_count }}</span></p>
+                    <p>
+                      <a href="{% url 'subscribed' username %}" class="link-text">
+                        Subscribed: <span id="subscribed-count">{{ subscribed_count }}</span>
+                      </a>
+                    </p>
                     <div class="following-avatars">
                         {% for subscribe in subscribed|slice:":5"%}
                             <img src="{{ subscribe.profile_pic.url }}" class="avatar-img" width="50" height="50">

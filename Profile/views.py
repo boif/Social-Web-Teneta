@@ -109,16 +109,16 @@ def subscribersPage(request, username):
 
 
 @login_required
-def subscribesPage(request, username):
+def subscribedPage(request, username):
     user = get_object_or_404(User, username = username)
     profile = user.profile
-    subscribes = profile.subscription.all()
+    subscribed = profile.subscription.all()
 
     return render(
         request,
-        'profile/subscribes.html',
+        'profile/subscribed.html',
         {
             'profile': profile,
-            'subscribes': subscribes
+            'subscribed': subscribed
         }
     )

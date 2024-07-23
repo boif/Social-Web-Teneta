@@ -16,7 +16,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('profile/<str:username>/', views.profile, name='profile'),
     path('profile/<str:username>/subscribers/', views.subscribersPage, name='subscribers'),
-    path('profile/<str:username>/subscribes/', views.subscribesPage, name='subscribes'),
+    path('profile/<str:username>/subscribed/', views.subscribedPage, name='subscribed'),
     path('subscribe/<str:username>/', views.subscribe, name='subscribe'),
     path('unsubscribe/<str:username>/', views.unsubscribe, name='unsubscribe'),
 ]
