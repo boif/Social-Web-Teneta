@@ -276,3 +276,35 @@ body {
 .link-text:hover {
   color: #dcdcdc; /* Цвет текста при наведении, можно изменить на любой другой */
 }
+
+.subscriber-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.subscriber-item {
+  margin: 10px 0;
+}
+
+.subscriber-button {
+  display: inline-block;
+  background-color: #333; /* Темный цвет для кнопки */
+  color: #fff; /* Белый текст */
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.subscriber-button:hover {
+  background-color: #555; /* Более светлый оттенок при наведении */
+}
+
+.subscriber-button img {
+  margin-right: 10px; /* Отступ между изображением и текстом */
+  border-radius: 50%; /* Круглые аватары */
+}

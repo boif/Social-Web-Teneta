@@ -2,10 +2,10 @@
 
 {% block content %}
 <h1>Profiles {{ profile.user.username }} is Subscribed To</h1>
-<ul>
+<ul class="subscriber-list">
   {% for subscribed_profile in subscribed %}
-  <li>
-    <a href="{% url 'profile' subscribed_profile.user.username %}">
+  <li class="subscriber-item">
+    <a href="{% url 'profile' subscribed_profile.user.username %}" class="subscriber-button">
       <img
         src="{{ subscribed_profile.profile_pic.url }}"
         alt="{{ subscribed_profile.user.username }}"
