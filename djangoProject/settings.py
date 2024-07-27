@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     'Profile.apps.AppConfig',
     'News.apps.NewsConfig',
+    'Chat.apps.ChatConfig',
 ]
 
 MIDDLEWARE = [
