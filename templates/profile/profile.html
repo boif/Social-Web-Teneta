@@ -14,6 +14,10 @@
                     <button id="subscribe-btn" data-username="{{ username }}" class="subscribe-btn" {% if user.is_authenticated and user.username != username and not is_subscribed %}style="display: block;"{% else %}style="display: none;"{% endif %}>Subscribe</button>
                     <button id="unsubscribe-btn" data-username="{{ username }}" class="unsubscribe-btn" {% if user.is_authenticated and user.username != username and is_subscribed %}style="display: block;"{% else %}style="display: none;"{% endif %}>Unsubscribe</button>
 
+                    {% if user.is_authenticated and user.username != username %}
+                    <a href="{% url 'start_chat' username=username %}" class="btn btn-secondary">Написать пользователю</a>
+                    {% endif %}
+
                     <p>
                       <a href="{% url 'subscribers' username %}" class="link-text">
                         Subscribers: <span id="subscriber-count">{{ subscribers_count }}</span>

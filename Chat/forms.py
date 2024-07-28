@@ -1,17 +1,14 @@
 from django import forms
-from Chat.models import Chat
+from django.contrib.auth.models import User
 from Chat.models import Message
-
-class ChatForm(forms.ModelForm):
-    class Meta:
-        model = Chat
-        fields = ['name', 'participants']
-        widgets = {
-            'participants': forms.CheckboxSelectMultiple,
-        }
 
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
-        fields = ['text']
+        fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={'placeholder': 'Введите сообщение...', 'rows': 3}),
+        }
 
+class ChatForm(forms.Form):
+    user = forms.ModelChoiceField(queryset=User.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
