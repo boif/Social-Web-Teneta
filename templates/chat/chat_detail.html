@@ -1,52 +1,85 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/chat.css' %}">
+
 <div class="chat-container">
     <h2>Чат с {{ chat_partner.username }}</h2>
 
+    <!-- Message Display Section -->
     <div class="messages" id="chat-log">
         {% for message in messages %}
-        <div class="message {% if message.sender == request.user %}outgoing{% else %}incoming{% endif %}">
+        <div
+          class="message {% if message.sender == request.user %}outgoing{% else %}incoming{% endif %}"
+        >
             <strong>{{ message.sender.username }}</strong>: {{ message.content }}
             <small>{{ message.timestamp|date:"H:i" }}</small>
         </div>
         {% empty %}
-        <p>Нет сообщений. Начните разговор!</p>
+        <p class="no-messages">Нет сообщений. Начните разговор!</p>
         {% endfor %}
+    </div>
+
+    <!-- Message Input Section -->
+    <div class="message-input">
+        <form id="chat-form">
+            <input
+              type="text"
+              id="chat-message-input"
+              placeholder="Напишите сообщение..."
+              autofocus
+              autocomplete="off"
+            />
+            <button type="submit" id="chat-message-submit">Отправить</button>
+        </form>
     </div>
 </div>
 
+<!-- Include JavaScript to handle WebSockets -->
 <script>
-    const chatId = {{ chat.id }};
-    const username = "{{ request.user.username }}";
-    const chatSocket = new WebSocket(
-        'ws://' + window.location.host + '/ws/chat/' + chatId + '/'
+  // Establish WebSocket connection
+  const chatSocket = new WebSocket(
+    'ws://' + window.location.host + '/ws/chat/{{ chat.id }}/'
+  );
+
+  chatSocket.onmessage = function (e) {
+    const data = JSON.parse(e.data);
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message');
+    messageElement.classList.add(
+      data.sender === '{{ request.user.username }}' ? 'outgoing' : 'incoming'
     );
+    messageElement.innerHTML = `
+      <strong>${data.sender}</strong>: ${data.message}
+      <small>${data.timestamp}</small>
+    `;
+    document.querySelector('#chat-log').appendChild(messageElement);
+    document.querySelector('#chat-log').scrollTop = document.querySelector(
+      '#chat-log'
+    ).scrollHeight;
+  };
 
-    chatSocket.onmessage = function(e) {
-        const data = JSON.parse(e.data);
-        const chatLog = document.getElementById('chat-log');
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message');
-        messageElement.innerHTML = `<strong>${data.sender}</strong>: ${data.message} <small>${data.timestamp}</small>`;
-        chatLog.appendChild(messageElement);
-        chatLog.scrollTop = chatLog.scrollHeight;
-    };
+  chatSocket.onclose = function (e) {
+    console.error('Chat socket closed unexpectedly');
+  };
 
-    chatSocket.onclose = function(e) {
-        console.error('Chat socket closed unexpectedly');
-    };
+  document.querySelector('#chat-form').onsubmit = function (e) {
+    e.preventDefault();
+    const messageInputDom = document.querySelector('#chat-message-input');
+    const message = messageInputDom.value.trim();
 
-    document.getElementById('chat-message-form').onsubmit = function(e) {
-        e.preventDefault();
-        const messageInputDom = document.querySelector('textarea[name="content"]');
-        const message = messageInputDom.value;
-        chatSocket.send(JSON.stringify({
-            'message': message,
-            'sender': username
-        }));
-        messageInputDom.value = '';
-    };
+    if (message !== '') {
+      chatSocket.send(
+        JSON.stringify({
+          message: message,
+        })
+      );
+      messageInputDom.value = '';
+    }
+  };
 </script>
 
 {% endblock %}
