@@ -1,4 +1,4 @@
-version: '3.9'  # Specify the version
+version: '3.9'
 
 services:
   db:
@@ -19,7 +19,11 @@ services:
 
   web:
     build: .
-    command: bash -c "python manage.py collectstatic --noinput && python manage.py makemigrations && python manage.py migrate && daphne -b 0.0.0.0 -p 8000 djangoProject.asgi:application"
+    command: >
+      bash -c "python manage.py collectstatic --noinput &&
+               python manage.py makemigrations &&
+               python manage.py migrate &&
+               daphne -b 0.0.0.0 -p 8000 djangoProject.asgi:application"
     volumes:
       - .:/app
     ports:
@@ -27,6 +31,10 @@ services:
     depends_on:
       - db
       - redis
+    environment:
+      DATABASE_URL: postgres://postgres:12345@db:5432/TenetaDB
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
 
 volumes:
   postgres_data:

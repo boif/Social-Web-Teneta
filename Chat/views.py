@@ -22,11 +22,7 @@ def start_chat(request, username):
 @login_required
 def chat_detail(request, chat_id):
     chat = get_object_or_404(Chat, id = chat_id)
-
-    # Exclude the current user from the participants to find the chat partner
     chat_partner = chat.participants.exclude(username = request.user.username).first()
-
-    # Fetch the chat messages
     messages = Message.objects.filter(chat = chat).order_by('timestamp')
 
     return render(
