@@ -308,3 +308,48 @@ body {
   margin-right: 10px; /* Отступ между изображением и текстом */
   border-radius: 50%; /* Круглые аватары */
 }
+
+.chat-messages {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.message-item {
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.message-item .message-time {
+  display: block;
+  font-size: 0.8em;
+  color: #999;
+  margin-top: 5px;
+}
+
+.btn {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn:hover {
+  background-color: #555;
+}
