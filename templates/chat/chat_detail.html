@@ -4,10 +4,10 @@
 
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'css/chat.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/chat.css' %}">
 
 <div class="chat-container">
-    <h2>Чат с {{ chat_partner.username }}</h2>
+    <h2>Chat with {{ chat_partner.username }}</h2>
 
     <!-- Message Display Section -->
     <div class="messages" id="chat-log">
@@ -19,7 +19,7 @@
             <small>{{ message.timestamp|date:"H:i" }}</small>
         </div>
         {% empty %}
-        <p class="no-messages">Нет сообщений. Начните разговор!</p>
+        <p class="no-messages">No messages yet. Start the conversation!</p>
         {% endfor %}
     </div>
 
@@ -29,11 +29,11 @@
             <input
               type="text"
               id="chat-message-input"
-              placeholder="Напишите сообщение..."
+              placeholder="Type your message..."
               autofocus
               autocomplete="off"
             />
-            <button type="submit" id="chat-message-submit">Отправить</button>
+            <button type="submit" id="chat-message-submit">Send</button>
         </form>
     </div>
 </div>
