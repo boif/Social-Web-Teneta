@@ -12,9 +12,7 @@
     <!-- Message Display Section -->
     <div class="messages" id="chat-log">
         {% for message in messages %}
-        <div
-          class="message {% if message.sender == request.user %}outgoing{% else %}incoming{% endif %}"
-        >
+        <div class="message {% if message.sender == request.user %}outgoing{% else %}incoming{% endif %}">
             <strong>{{ message.sender.username }}</strong>: {{ message.content }}
             <small>{{ message.timestamp|date:"H:i" }}</small>
         </div>
@@ -38,7 +36,6 @@
     </div>
 </div>
 
-<!-- Include JavaScript to handle WebSockets -->
 <script>
   // Establish WebSocket connection
   const chatSocket = new WebSocket(
@@ -72,12 +69,32 @@
     const message = messageInputDom.value.trim();
 
     if (message !== '') {
+      // Send the message via WebSocket
       chatSocket.send(
         JSON.stringify({
           message: message,
         })
       );
-      messageInputDom.value = '';
+
+      // Send the message via POST request to save in the database
+      fetch("{% url 'send_message' chat.id %}", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: new URLSearchParams({
+          'content': message
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          messageInputDom.value = '';
+          // Optionally, update the chat log here if needed
+        }
+      })
+      .catch(error => console.error('Error:', error));
     }
   };
 </script>
