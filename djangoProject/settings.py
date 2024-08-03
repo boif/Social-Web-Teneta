@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'crispy_bootstrap4',
-    'Profile.apps.AppConfig',
-    'News.apps.NewsConfig',
-    'Chat.apps.ChatConfig',
+    'Profile',
+    'News',
+    'Chat',
     'channels',
 ]
 
