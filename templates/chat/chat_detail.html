@@ -4,22 +4,20 @@
 
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'css/chat.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/chat.css' %}">
 
 <div class="chat-container">
-    <h2>Чат с {{ chat_partner.username }}</h2>
+    <h2>Chat with {{ chat_partner.username }}</h2>
 
     <!-- Message Display Section -->
     <div class="messages" id="chat-log">
         {% for message in messages %}
-        <div
-          class="message {% if message.sender == request.user %}outgoing{% else %}incoming{% endif %}"
-        >
+        <div class="message {% if message.sender == request.user %}outgoing{% else %}incoming{% endif %}">
             <strong>{{ message.sender.username }}</strong>: {{ message.content }}
             <small>{{ message.timestamp|date:"H:i" }}</small>
         </div>
         {% empty %}
-        <p class="no-messages">Нет сообщений. Начните разговор!</p>
+        <p class="no-messages">No messages yet. Start the conversation!</p>
         {% endfor %}
     </div>
 
@@ -29,16 +27,15 @@
             <input
               type="text"
               id="chat-message-input"
-              placeholder="Напишите сообщение..."
+              placeholder="Type your message..."
               autofocus
               autocomplete="off"
             />
-            <button type="submit" id="chat-message-submit">Отправить</button>
+            <button type="submit" id="chat-message-submit">Send</button>
         </form>
     </div>
 </div>
 
-<!-- Include JavaScript to handle WebSockets -->
 <script>
   // Establish WebSocket connection
   const chatSocket = new WebSocket(
@@ -72,12 +69,32 @@
     const message = messageInputDom.value.trim();
 
     if (message !== '') {
+      // Send the message via WebSocket
       chatSocket.send(
         JSON.stringify({
           message: message,
         })
       );
-      messageInputDom.value = '';
+
+      // Send the message via POST request to save in the database
+      fetch("{% url 'send_message' chat.id %}", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: new URLSearchParams({
+          'content': message
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          messageInputDom.value = '';
+          // Optionally, update the chat log here if needed
+        }
+      })
+      .catch(error => console.error('Error:', error));
     }
   };
 </script>

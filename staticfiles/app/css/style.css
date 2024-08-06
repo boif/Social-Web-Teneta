@@ -308,24 +308,3 @@ body {
   margin-right: 10px; /* Отступ между изображением и текстом */
   border-radius: 50%; /* Круглые аватары */
 }
-
-.chat-container {
-    max-width: 600px;
-    margin: 0 auto;
-}
-.messages {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    height: 400px;
-    overflow-y: scroll;
-}
-.message {
-    margin-bottom: 10px;
-}
-.message.incoming {
-    text-align: left;
-}
-.message.outgoing {
-    text-align: right;
-}
