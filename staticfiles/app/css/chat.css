@@ -1,5 +1,14 @@
 /* Basic styling for the chat interface */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Set the container to take up the full height of the viewport */
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
@@ -10,8 +19,8 @@
 }
 
 .messages {
-  height: 400px;
-  overflow-y: scroll;
+  flex: 1; /* This makes the message area take up all available space */
+  overflow-y: auto; /* Ensure the messages can scroll */
   margin-bottom: 15px;
   border-bottom: 1px solid #444;
 }
