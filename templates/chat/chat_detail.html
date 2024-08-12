@@ -37,6 +37,12 @@
 </div>
 
 <script>
+  // Scroll to the bottom of the chat log on page load
+  function scrollToBottom() {
+    const chatLog = document.querySelector('#chat-log');
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }
+
   // Establish WebSocket connection
   const chatSocket = new WebSocket(
     'ws://' + window.location.host + '/ws/chat/{{ chat.id }}/'
@@ -53,10 +59,9 @@
       <strong>${data.sender}</strong>: ${data.message}
       <small>${data.timestamp}</small>
     `;
-    document.querySelector('#chat-log').appendChild(messageElement);
-    document.querySelector('#chat-log').scrollTop = document.querySelector(
-      '#chat-log'
-    ).scrollHeight;
+    const chatLog = document.querySelector('#chat-log');
+    chatLog.appendChild(messageElement);
+    chatLog.scrollTop = chatLog.scrollHeight; // Scroll to bottom after new message
   };
 
   chatSocket.onclose = function (e) {
@@ -97,6 +102,9 @@
       .catch(error => console.error('Error:', error));
     }
   };
+
+  // Execute scroll to bottom on page load
+  window.onload = scrollToBottom;
 </script>
 
 {% endblock %}
