@@ -29,5 +29,17 @@ cd Teneta
 ## Make sure Docker and Docker Compose are installed, then build the containers:
 ```
 docker-compose build
-
 ```
+### Step 3: Run the project
+
+## After building the containers, run the following command to start the project:
+```
+docker-compose up
+```
+This will start the following services:
+
+    Web: The Django application running on port 8000.
+    Database: PostgreSQL running on port 5434.
+    Redis: Redis service running on port 6379.
+
+The application will be available at http://localhost:8000.
