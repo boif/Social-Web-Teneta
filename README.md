@@ -43,3 +43,19 @@ This will start the following services:
     Redis: Redis service running on port 6379.
 
 The application will be available at http://localhost:8000.
+
+### Setup
+
+## If you need to create a superuser for accessing the Django admin panel, you can run:
+```
+docker-compose exec web python manage.py createsuperuser
+```
+
+### Environment Variables
+
+## Here are the key environment variables used in this project:
+
+    DATABASE_URL: URL for the PostgreSQL database. Example: postgres://postgres:12345@db:5432/TenetaDB
+    REDIS_HOST: The host where Redis is running. Default is redis.
+    REDIS_PORT: The port where Redis is running. Default is 6379.
+    DJANGO_SETTINGS_MODULE: The settings module to use. Default is djangoProject.settings.
