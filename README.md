@@ -22,3 +22,12 @@ This project is a Django application with real-time chat, news posts, and user p
 ```bash
 git clone https://github.com/boif/Social-Web-Teneta.git
 cd Teneta
+```
+
+### Step 2: Build Docker containers
+
+## Make sure Docker and Docker Compose are installed, then build the containers:
+```
+docker-compose build
+
+```
