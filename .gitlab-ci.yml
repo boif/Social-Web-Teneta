@@ -1,0 +1,92 @@
+image: docker:24.0.2
+
+services:
+  - docker:24.0.2-dind
+
+variables:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+  POSTGRES_DB: TenetaDB
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: 12345
+  DATABASE_URL: postgres://postgres:12345@db:5432/TenetaDB
+  REDIS_HOST: redis
+  REDIS_PORT: 6379
+  DJANGO_SETTINGS_MODULE: djangoProject.settings
+
+stages:
+  - build
+  - test
+  - security
+  - deploy
+
+#Билд докер образа
+build:
+  stage: build
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:latest .
+    - docker tag $CI_REGISTRY_IMAGE:latest $DOCKERHUB_USERNAME/social_web_teneta:latest
+  only:
+    - main
+
+#Тестирование
+test:
+  stage: test
+  services:
+    - name: postgres:latest
+      alias: db
+    - name: redis:alpine
+      alias: redis
+  script:
+    - pip install -r requirements.txt
+    - python manage.py makemigrations
+    - python manage.py migrate
+    #- python manage.py test
+  only:
+    - main
+
+#Проверка безопасности
+sast:
+  stage: security
+  script:
+    - pip install bandit safety
+    - bandit -r
+    - safety check -r requirements.txt
+  allow_failure: true
+
+dependency_scanning:
+  stage: security
+  script:
+    - pip install safety
+    - safety check -r requirements.txt
+  allow_failure: true
+
+trufflehog:
+  stage: security
+  script:
+    - docker pull trufflesecurity/trufflehog:latest
+    - docker run --rm -v $(pwd):/repo trufflesecurity/trufflehog:latest filesystem /repo
+    - docker run --rm trufflesecurity/trufflehog:latest git --repo $CI_REPOSITORY_URL
+  allow_failure: true
+
+#Деплой в докерхаб
+deploy:
+  stage: deploy
+  script:
+    - echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
+    - docker push $DOCKERHUB_USERNAME/social_web_teneta:latest
+  only:
+    - main
+  when: on_success
+
+#Кэширование
+cache:
+  path:
+    - .pip_cache/
+
+#Проверка на форматирование
+lint:
+  stage: test
+  script:
+    - pip install black
+    - black --check .
