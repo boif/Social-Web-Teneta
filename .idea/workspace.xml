@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="test gitlab mirror">
-      <change afterPath="$PROJECT_DIR$/.gitlab-ci.yml" afterDir="false" />
-    </list>
+    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="CI yml" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="CI" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -47,7 +45,7 @@
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "CI",
+    "git-widget-placeholder": "master",
     "last_opened_file_path": "/home/boif3x/PycharmProjects/Teneta/djangoProject",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -115,7 +113,23 @@
       <option name="project" value="LOCAL" />
       <updated>1733742369954</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="CI yml">
+      <option name="closed" value="true" />
+      <created>1734000556258</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1734000556258</updated>
+    </task>
+    <task id="LOCAL-00003" summary="CI yml">
+      <option name="closed" value="true" />
+      <created>1734000588829</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1734000588829</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,6 +138,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test gitlab mirror" />
     <MESSAGE value="docker-compose upd, lifechecks and depends" />
-    <option name="LAST_COMMIT_MESSAGE" value="docker-compose upd, lifechecks and depends" />
+    <MESSAGE value="CI" />
+    <MESSAGE value="CI yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="CI yml" />
   </component>
 </project>
