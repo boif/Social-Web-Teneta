@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="ci test plsrng">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="test bandit">
       <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.gitlab-ci.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ci-test-1" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangoProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangoProject/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +148,39 @@
       <option name="project" value="LOCAL" />
       <updated>1734001258771</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix .env + test">
+      <option name="closed" value="true" />
+      <created>1734013035188</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1734013035188</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix .env + test">
+      <option name="closed" value="true" />
+      <created>1734013957909</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1734013957909</updated>
+    </task>
+    <task id="LOCAL-00008" summary="test bandit">
+      <option name="closed" value="true" />
+      <created>1734014279273</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1734014279273</updated>
+    </task>
+    <task id="LOCAL-00009" summary="test bandit">
+      <option name="closed" value="true" />
+      <created>1734014303482</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1734014303482</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,16 +196,8 @@
     <MESSAGE value="CI yml" />
     <MESSAGE value="cache path" />
     <MESSAGE value="ci test plsrng" />
-    <option name="LAST_COMMIT_MESSAGE" value="ci test plsrng" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/djangoProject/settings.py</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="fix .env + test" />
+    <MESSAGE value="test bandit" />
+    <option name="LAST_COMMIT_MESSAGE" value="test bandit" />
   </component>
 </project>
