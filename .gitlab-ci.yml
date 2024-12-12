@@ -58,7 +58,7 @@ sast:
     - source /venv/bin/activate
     - pip install bandit safety
     - bandit -r .
-    - safety check -r requirements.txt
+    - safety scan -r requirements.txt
   allow_failure: true
 
 trufflehog:
