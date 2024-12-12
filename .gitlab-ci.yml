@@ -76,3 +76,7 @@ deploy:
   only:
     - main
   when: on_success
+
+cache:
+  paths:
+    - .pip_cache/
