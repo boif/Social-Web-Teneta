@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="test gitlab mirror">
-      <change beforePath="$PROJECT_DIR$/.idea/Teneta.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Teneta.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitlab-ci.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +35,9 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="2pEuATpEkPYwoeV4crjseYXMqgl" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -47,7 +47,7 @@
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "docker-compose-lifechecks+depends",
+    "git-widget-placeholder": "CI",
     "last_opened_file_path": "/home/boif3x/PycharmProjects/Teneta/djangoProject",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -123,6 +123,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="test gitlab mirror" />
-    <option name="LAST_COMMIT_MESSAGE" value="test gitlab mirror" />
+    <MESSAGE value="docker-compose upd, lifechecks and depends" />
+    <option name="LAST_COMMIT_MESSAGE" value="docker-compose upd, lifechecks and depends" />
   </component>
 </project>
