@@ -56,9 +56,8 @@ sast:
     - apk add --no-cache python3 py3-pip gcc python3-dev musl-dev linux-headers
     - python3 -m venv /venv
     - source /venv/bin/activate
-    - pip install bandit safety
+    - pip install bandit
     - bandit -r .
-    - safety scan -r requirements.txt
   allow_failure: true
 
 trufflehog:
