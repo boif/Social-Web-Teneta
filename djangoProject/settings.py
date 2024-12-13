@@ -11,10 +11,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 from decouple import config
 
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-default-key-for-development-only')
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
@@ -75,11 +75,11 @@ ASGI_APPLICATION = 'djangoProject.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'TenetaDB',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': 'db',
-        'PORT': '5432',
+        'NAME': config('POSTGRES_DB'),
+        'USER': config('POSTGRES_USER'),
+        'PASSWORD': config('POSTGRES_PASSWORD'),
+        'HOST': config('POSTGRES_HOST'),
+        'PORT': config('POSTGRES_PORT'),
     }
 }
 
@@ -107,7 +107,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("redis", 6379)],
+            "hosts": [(config('REDIS_HOST'), config('REDIS_PORT'))],
         },
     },
 }
@@ -142,3 +142,10 @@ LOGIN_REDIRECT_URL = ""
 LOGOUT_REDIRECT_URL = ""
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# SECURE_HSTS_SECONDS = 31536000  # Включить HTTP Strict Transport Security
+# SECURE_SSL_REDIRECT = True  # Перенаправлять только на HTTPS
+# SESSION_COOKIE_SECURE = True  # Куки только через HTTPS
+# CSRF_COOKIE_SECURE = True  # CSRF-куки только через HTTPS
+# SECURE_BROWSER_XSS_FILTER = True  # Защита от XSS
+# SECURE_CONTENT_TYPE_NOSNIFF = True  # Отключить sniffing
