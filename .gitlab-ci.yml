@@ -30,6 +30,7 @@ test:
       alias: redis
   image: python:3.12
   script:
+    - echo $POSTGRES_PASSWORD
     - pip install -r requirements.txt
     - python manage.py makemigrations
     - python manage.py migrate
