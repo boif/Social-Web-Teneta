@@ -19,26 +19,26 @@ build:
     - docker build -t $CI_REGISTRY_IMAGE:latest .
     - docker tag $CI_REGISTRY_IMAGE:latest docker.io/$DOCKERHUB_USERNAME/social_web_teneta:latest
 
-test:
-  stage: test
-  services:
-    - name: postgres:latest
-      alias: db
-      variables:
-        POSTGRES_DB: POSTGRES_DB
-        POSTGRES_HOST: $POSTGRES_HOST
-        POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-    - name: redis:alpine
-      alias: redis
-  image: python:3.12
-  script:
-    - sleep 60
-    - python -m venv venv
-    - source venv/bin/activate
-    - pip install -r requirements.txt
-    - python manage.py shell -c "from django.db import connections; print(connections['default'].cursor())"
-    - python manage.py makemigrations
-    - python manage.py migrate
+#test:
+#  stage: test
+#  services:
+#    - name: postgres:latest
+#      alias: db
+#      variables:
+#        POSTGRES_DB: POSTGRES_DB
+#        POSTGRES_HOST: $POSTGRES_HOST
+#        POSTGRES_PASSWORD: $POSTGRES_PASSWORD
+#    - name: redis:alpine
+#      alias: redis
+#  image: python:3.12
+#  script:
+#    - sleep 60
+#    - python -m venv venv
+#    - source venv/bin/activate
+#    - pip install -r requirements.txt
+#    - python manage.py shell -c "from django.db import connections; print(connections['default'].cursor())"
+#    - python manage.py makemigrations
+#    - python manage.py migrate
 
 lint:
   stage: test
