@@ -32,7 +32,8 @@ test:
       alias: redis
   image: python:3.12
   script:
-    - sleep 10
+    - python -m venv venv
+    - source venv/bin/activate
     - pip install -r requirements.txt
     - python manage.py makemigrations
     - python manage.py migrate
