@@ -24,6 +24,8 @@ test:
   services:
     - name: postgres:latest
       alias: db
+      variables:
+        POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     - name: redis:alpine
       alias: redis
   script:

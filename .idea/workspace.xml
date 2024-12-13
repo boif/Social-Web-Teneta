@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="fix docker-compose.yml, CI and masked ENV" />
+    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="CI docker username fix" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +45,7 @@
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "test-branch-ci",
     "last_opened_file_path": "/home/boif3x/PycharmProjects/Teneta/djangoProject",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -186,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734099082223</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="CI docker username fix">
+      <option name="closed" value="true" />
+      <created>1734100103737</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1734100103737</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,6 +213,7 @@
     <MESSAGE value="fix .env + test" />
     <MESSAGE value="test bandit" />
     <MESSAGE value="fix docker-compose.yml, CI and masked ENV" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix docker-compose.yml, CI and masked ENV" />
+    <MESSAGE value="CI docker username fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="CI docker username fix" />
   </component>
 </project>
