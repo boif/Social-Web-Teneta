@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="test bandit">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="fix docker-compose.yml, CI and masked ENV">
       <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.gitlab-ci.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/djangoProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangoProject/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +106,7 @@
       <workItem from="1733992679329" duration="173000" />
       <workItem from="1733992855253" duration="220000" />
       <workItem from="1733993086931" duration="1869000" />
-      <workItem from="1734087665166" duration="7494000" />
+      <workItem from="1734087665166" duration="7993000" />
     </task>
     <task id="LOCAL-00001" summary="test gitlab mirror">
       <option name="closed" value="true" />
@@ -184,7 +180,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734014303482</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fix docker-compose.yml, CI and masked ENV">
+      <option name="closed" value="true" />
+      <created>1734099082223</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1734099082223</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,6 +206,7 @@
     <MESSAGE value="ci test plsrng" />
     <MESSAGE value="fix .env + test" />
     <MESSAGE value="test bandit" />
-    <option name="LAST_COMMIT_MESSAGE" value="test bandit" />
+    <MESSAGE value="fix docker-compose.yml, CI and masked ENV" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix docker-compose.yml, CI and masked ENV" />
   </component>
 </project>
