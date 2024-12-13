@@ -32,6 +32,7 @@ test:
       alias: redis
   image: python:3.12
   script:
+    - sleep 10
     - pip install -r requirements.txt
     - python manage.py makemigrations
     - python manage.py migrate
