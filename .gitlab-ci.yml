@@ -28,6 +28,7 @@ test:
         POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     - name: redis:alpine
       alias: redis
+  image: python:3.12
   script:
     - pip install -r requirements.txt
     - python manage.py makemigrations

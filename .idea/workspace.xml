@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="CI docker username fix" />
+    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="test fix">
+      <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.gitlab-ci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -194,7 +197,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734100103737</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="test fix">
+      <option name="closed" value="true" />
+      <created>1734102152238</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1734102152238</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,6 +225,7 @@
     <MESSAGE value="test bandit" />
     <MESSAGE value="fix docker-compose.yml, CI and masked ENV" />
     <MESSAGE value="CI docker username fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="CI docker username fix" />
+    <MESSAGE value="test fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="test fix" />
   </component>
 </project>
