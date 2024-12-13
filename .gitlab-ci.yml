@@ -17,7 +17,7 @@ build:
   stage: build
   script:
     - docker build -t $CI_REGISTRY_IMAGE:latest .
-    - docker tag $CI_REGISTRY_IMAGE:latest docker.io/$DOCKERHUB_USERNAME/social_web_teneta:latest
+    - docker tag docker.io/$DOCKERHUB_USERNAME/social_web_teneta:latest $CI_REGISTRY_IMAGE:latest
 
 #test:
 #  stage: test
