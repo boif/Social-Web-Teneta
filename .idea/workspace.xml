@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="test bd 3">
+    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="test bd 4 bd run check">
       <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.gitlab-ci.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,7 +236,23 @@
       <option name="project" value="LOCAL" />
       <updated>1734105680818</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="test bd 3 venv">
+      <option name="closed" value="true" />
+      <created>1734106226046</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1734106226046</updated>
+    </task>
+    <task id="LOCAL-00018" summary="test bd 4 bd run check">
+      <option name="closed" value="true" />
+      <created>1734106557211</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1734106557211</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,6 +277,8 @@
     <MESSAGE value="test pass 3" />
     <MESSAGE value="test bd 2" />
     <MESSAGE value="test bd 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="test bd 3" />
+    <MESSAGE value="test bd 3 venv" />
+    <MESSAGE value="test bd 4 bd run check" />
+    <option name="LAST_COMMIT_MESSAGE" value="test bd 4 bd run check" />
   </component>
 </project>

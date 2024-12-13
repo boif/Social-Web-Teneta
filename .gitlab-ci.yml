@@ -34,6 +34,7 @@ test:
   script:
     - python -m venv venv
     - source venv/bin/activate
+    - python manage.py shell -c "from django.db import connections; print(connections['default'].cursor())"
     - pip install -r requirements.txt
     - python manage.py makemigrations
     - python manage.py migrate
@@ -52,7 +53,6 @@ sast:
   script:
     - apk add --no-cache python3 py3-pip gcc python3-dev musl-dev linux-headers
     - python3 -m venv /venv
-    - python manage.py shell -c "from django.db import connections; print(connections['default'].cursor())"
     - source /venv/bin/activate
     - pip install bandit
     - bandit -r .
