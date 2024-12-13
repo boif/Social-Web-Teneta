@@ -25,12 +25,13 @@ test:
     - name: postgres:latest
       alias: db
       variables:
+        POSTGRES_DB: POSTGRES_DB
+        POSTGRES_HOST: $POSTGRES_HOST
         POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     - name: redis:alpine
       alias: redis
   image: python:3.12
   script:
-    - echo $POSTGRES_PASSWORD
     - pip install -r requirements.txt
     - python manage.py makemigrations
     - python manage.py migrate
