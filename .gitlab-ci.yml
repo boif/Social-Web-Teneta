@@ -70,7 +70,7 @@ deploy:
   stage: deploy
   script:
     - echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USERNAME --password-stdin
-    - docker push $DOCKERHUB_USERNAME/social_web_teneta:latest
+    - docker push docker.io/$DOCKERHUB_USERNAME/social_web_teneta:latest
   when: on_success
 
 cache:
