@@ -3,7 +3,7 @@ stages:
   - deploy
 
 variables:
-  DOCKER_IMAGE: $DOCKERHUB_USERNAME/social-web-teneta  # Название образа
+  DOCKER_IMAGE: $DOCKERHUB_USERNAME/social_web_teneta  # Название образа
   DOCKER_TAG: latest  # Тег образа (можно указать, например, $CI_COMMIT_REF_NAME для ветки)
 
 before_script:
