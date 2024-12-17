@@ -16,10 +16,10 @@ lint:
     - source venv/bin/activate
     - pip install -r requirements.txt
   script:
-    - pylint $(git ls-files '*.py') --output-format=colorized > pylint_report.txt || true
+    - pylint $(git ls-files '*.py') --output-format=colorized > logs/pylint_report.txt || true
   artifacts:
     paths:
-      - pylint-report.txt
+      - logs/pylint_report.txt
     when: always
   allow_failure: true
 
