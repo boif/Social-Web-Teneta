@@ -15,6 +15,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     This consumer handles the websocket lifecycle of the chat room.
     """
+
+    def __init__(self, *args, **kwargs):
+        """
+        Initializes the chatConsumer instance.
+        """
+
+        super().__init__(*args, **kwargs)
+        self.chat_id = None
+        self.chat_group_name = None
     async def connect(self):
         """
         Handles the websocket connection request.
@@ -33,7 +42,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
         await self.accept()
 
-    async def disconnect(self):
+    async def disconnect(self, code):
         """
         Handles the websocket disconnection request.
 
@@ -45,7 +54,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
 
-    async def receive(self, text_data):
+    async def receive(self, text_data=None, bytes_data=None):
         """
         Recieves messages from chat room.
 
