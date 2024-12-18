@@ -4,6 +4,18 @@ from django.urls import path
 from Profile import views, forms
 from django.contrib.auth.views import LoginView, LogoutView
 
+"""
+This module defines the url patterns for the profile app.
+
+Routes:
+    - 'signup/' : sign up page.
+    - 'login/' : login page.
+    - 'logout/' : logout func.
+    - 'profile/<str:username>/' : profile page.
+    - 'profile/<str:username>/subscribers/' : subscribe func.
+    - 'profile/<str:username>/unsubscribe/' : unsubscribe func.
+"""
+
 urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('login/',

@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect , get_object_or_404
-from Profile.forms import RegisterForm, ProfileForm
+from profile.forms import RegisterForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-from News.models import Post
-from Profile.models import Profile
-from News.forms import PostForm
+from news.models import Post
+from profile.models import Profile
+from news.forms import PostForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -22,20 +22,17 @@ def signup(request):
     else:
         form = RegisterForm()
 
-    return render(
-        request,
-        'registration/signup.html',
-        {
-            'form': form,
-        },
-    )
+    return render(request, 'registration/signup.html', {'form': form})
 
 
 def profile(request, username):
     user = User.objects.get(username=username)
     posts = Post.objects.filter(author=user.id).order_by('-date')
     profile = user.profile
-    is_subscribed = request.user.profile.subscription.filter(user=user).exists() if request.user.is_authenticated else False
+    is_subscribed = (
+        request.user.is_authenticated and
+        request.user.profile.subscrcription.filter(user=user).exists()
+    )
     subscribed = profile.subscription.all()
     subscribers = Profile.objects.filter(subscription = user.profile)
     subscribers_count = subscribers .count()

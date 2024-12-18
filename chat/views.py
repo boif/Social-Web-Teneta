@@ -1,24 +1,22 @@
-"""
-Views for chat app.
-This module contains views for handling chats in the project.
-"""
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from Chat.models import Chat, Message
+from chat.models import Chat, Message
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse
 
+"""
+This module defines the views for the chat app.
+Views:
+    - startChat
+    - chatDetail
+    - sendMessage
+"""
 
 @login_required
-def start_chat(request, username):
+def startChat(request, username):
     """
     Starts or retrieves a private chat between logged-in users.
-
-    Args:
-        request (HttpRequest): Request object.
-        username (str): The username of the user to start a private chat.
 
     Returns:
         HttpResponse: Redirect to the private chat page.
@@ -35,13 +33,9 @@ def start_chat(request, username):
 
 
 @login_required
-def chat_detail(request, chat_id):
+def chatDetail(request, chat_id):
     """
     Displays a chat detail page.
-
-    Args:
-        request (HttpRequest): Request object.
-        chat_id (int): The id of the chat room.
 
     Returns:
         HttpResponse: Redirect to the chat detail page.
@@ -63,13 +57,9 @@ def chat_detail(request, chat_id):
 
 @login_required
 @require_POST
-def send_message(request, chat_id):
+def sendMessage(request, chat_id):
     """
     Send a message to a chat.
-
-    Args:
-        request (HttpRequest): Request object.
-        chat_id (int): The id of the chat room where the message will be sent.
 
     Returns:
         JsonResponse: Json response indicating the success or failure.
