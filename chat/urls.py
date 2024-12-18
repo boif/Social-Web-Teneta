@@ -1,6 +1,3 @@
-from django.urls import path
-from chat import views
-
 """
 This module defines the url patterns for the chat app.
 
@@ -9,6 +6,9 @@ Routes:
     - 'chat/<int:chat_id>/' : chat room.
     - 'chat/<int:chat_id>/send/' : send message to chat room.
 """
+
+from django.urls import path
+from chat import views
 
 urlpatterns = [
     path('chat/start/<str:username>/', views.startChat, name = 'start_chat'),

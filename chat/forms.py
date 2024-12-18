@@ -1,10 +1,10 @@
-from django import forms
-from django.contrib.auth.models import User
-from chat.models import Message
-
 """
 This module defines the forms used in the chat app.
 """
+
+from django import forms
+from django.contrib.auth.models import User
+from chat.models import Message
 
 class MessageForm(forms.ModelForm):
     """

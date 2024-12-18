@@ -1,13 +1,13 @@
-import json
-from channels.generic.websocket import AsyncWebsocketConsumer
-from django.utils.timezone import now
-
 """
 This module defines the websocket consumer for the chat.
 
 It handles websocket connections for real-time communication, connecting and disconnecting
 from the chat room, receiving and sending messages.
 """
+
+import json
+from channels.generic.websocket import AsyncWebsocketConsumer
+from django.utils.timezone import now
 
 class ChatConsumer(AsyncWebsocketConsumer):
     """

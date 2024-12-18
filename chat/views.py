@@ -1,10 +1,3 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from chat.models import Chat, Message
-from django.views.decorators.http import require_POST
-from django.http import JsonResponse
-
 """
 This module defines the views for the chat app.
 Views:
@@ -12,6 +5,13 @@ Views:
     - chatDetail
     - sendMessage
 """
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from chat.models import Chat, Message
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 
 @login_required
 def startChat(request, username):

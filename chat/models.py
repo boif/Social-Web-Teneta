@@ -1,6 +1,3 @@
-from django.db import models
-from django.contrib.auth.models import User
-
 """
 This module defines the models used in the chat app.
 
@@ -8,6 +5,9 @@ Models:
     - Chat
     - Message
 """
+
+from django.db import models
+from django.contrib.auth.models import User
 
 class Chat(models.Model):
     """
