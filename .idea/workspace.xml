@@ -4,15 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="linting 3">
+    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="linting consumers.py">
+      <change afterPath="$PROJECT_DIR$/.pylintrc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/consumers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/routing.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/routing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/djangoProject/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/djangoProject/asgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/news/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/news/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/news/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/news/migrations/0002_rename_user_post_author_alter_post_content.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/news/migrations/0003_alter_post_text.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/news/migrations/0004_comment_like_post_likes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/news/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/news/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/news/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/profile/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/profile/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/profile/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/profile/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profile/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/profile/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,22 +62,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR_AND_PREVIEW&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;pylint-fix&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/boif3x/PycharmProjects/Teneta/djangoProject&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.intellij.python.django.customization.DjangoModulesConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "django.template.preview.state": "SHOW_EDITOR_AND_PREVIEW",
+    "git-widget-placeholder": "pylint-fix",
+    "last_opened_file_path": "/home/boif3x/PycharmProjects/Teneta/djangoProject",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.intellij.python.django.customization.DjangoModulesConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Teneta" type="Python.DjangoServer" factoryName="Django server">
       <module name="Teneta" />
@@ -117,7 +131,8 @@
       <workItem from="1734444895788" duration="4185000" />
       <workItem from="1734506922913" duration="1431000" />
       <workItem from="1734520695946" duration="6431000" />
-      <workItem from="1734536437767" duration="4971000" />
+      <workItem from="1734536437767" duration="7410000" />
+      <workItem from="1734592819998" duration="8182000" />
     </task>
     <task id="LOCAL-00001" summary="test gitlab mirror">
       <option name="closed" value="true" />
@@ -391,7 +406,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734542055241</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="linting consumers.py">
+      <option name="closed" value="true" />
+      <created>1734552821815</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1734552821815</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,7 +424,7 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test bandit" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="fix docker-compose.yml, CI and masked ENV" />
     <MESSAGE value="CI docker username fix" />
     <MESSAGE value="test fix" />
@@ -426,6 +449,7 @@
     <MESSAGE value="linting" />
     <MESSAGE value="linting 2" />
     <MESSAGE value="linting 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="linting 3" />
+    <MESSAGE value="linting consumers.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="linting consumers.py" />
   </component>
 </project>

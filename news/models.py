@@ -1,6 +1,3 @@
-from django.db import models
-from django.contrib.auth.models import User
-
 """
 This module defines the models used in the news app.
 
@@ -10,10 +7,14 @@ Models:
     - Comment
 """
 
+from django.db import models
+from django.contrib.auth import get_user_model
+
 class Post(models.Model):
     """
     Represents a news post.
     """
+    User = get_user_model()
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE
@@ -47,6 +48,7 @@ class Like(models.Model):
     """
     Represents a like for post.
     """
+    User = get_user_model()
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
@@ -61,6 +63,7 @@ class Comment(models.Model):
     """
     Represents a comment for post.
     """
+    User = get_user_model()
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE

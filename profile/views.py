@@ -1,21 +1,41 @@
-from django.shortcuts import render, redirect , get_object_or_404
-from profile.forms import RegisterForm, ProfileForm
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from django.http import JsonResponse
-from news.models import Post
+"""
+This module defines the views for the profile app.
+
+Views:
+    - signup
+    - profile
+    - subscribe
+    - unsubscribe
+    - subscribers_page
+    - subscribed_page
+"""
+
 from profile.models import Profile
-from news.forms import PostForm
+from profile.forms import RegisterForm, ProfileForm
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
+from django.http import JsonResponse
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from news.models import Post
+from news.forms import PostForm
+
 def signup(request):
+    """
+    Displays the signup page and renders the signup form.
+
+    Returns:
+        HttpResponse: Renders the signup page and form.
+    """
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         profile_form = ProfileForm(request.POST)
         if form.is_valid() and profile_form.is_valid():
             user = form.save()
-            profile = profile_form.save(commit=False)
+            profile = profile_form.save(commit = False)
             profile.user = user
             profile.save()
             return redirect('/login/')
@@ -26,16 +46,21 @@ def signup(request):
 
 
 def profile(request, username):
-    user = User.objects.get(username=username)
-    posts = Post.objects.filter(author=user.id).order_by('-date')
+    """
+    Displays the profile page, posts, subscribers, unsubscribed and subscription status.
+
+    Returns:
+        HttpResponse: Renders the profile page.
+    """
+    User = get_user_model()
+    user = User.objects.get(username = username)
+    posts = Post.objects.filter(author = user.id).order_by('-date')
     profile = user.profile
-    is_subscribed = (
-        request.user.is_authenticated and
-        request.user.profile.subscrcription.filter(user=user).exists()
-    )
+    is_subscribed = request.user.profile.subscription.filter(
+        user = user).exists() if request.user.is_authenticated else False
     subscribed = profile.subscription.all()
     subscribers = Profile.objects.filter(subscription = user.profile)
-    subscribers_count = subscribers .count()
+    subscribers_count = subscribers.count()
     subscribed_count = subscribed.count()
 
     if request.method == "POST":
@@ -72,6 +97,13 @@ def profile(request, username):
 
 @login_required
 def subscribe(request, username):
+    """
+    Allows the logged-in user to subscribe to profile.
+
+    Returns:
+        JsonResponse: Json response with success.
+    """
+    User = get_user_model()
     user_to_subscribe = User.objects.get(username=username)
     request.user.profile.subscription.add(user_to_subscribe.profile)
 
@@ -82,6 +114,13 @@ def subscribe(request, username):
 
 @login_required
 def unsubscribe(request, username):
+    """
+    Allows the logged-in user to unsubscribe from profile.
+
+    Returns:
+        JsonResponse: Json response with success.
+    """
+    User = get_user_model()
     user_to_unsubscribe = User.objects.get(username=username)
     request.user.profile.subscription.remove(user_to_unsubscribe.profile)
 
@@ -89,33 +128,48 @@ def unsubscribe(request, username):
         'success': True,
         'username': user_to_unsubscribe.username
     })
+
 @login_required
-def subscribersPage(request, username):
+def subscribers_page(request, username):
+    """
+    Displays the subscribers page.
+
+    Returns:
+        HttpResponse: Renders the subscribers page.
+    """
+    User = get_user_model()
     user = get_object_or_404(User, username=username)
-    profile = user.profile
-    subscribers = Profile.objects.filter(subscription = user.profile)
+    user_profile = user.profile
+    subscribers = Profile.objects.filter(subscription=user_profile)
 
     return render(
         request,
         'profile/subscribers.html',
         {
-            'profile': profile,
+            'profile': user_profile,
             'subscribers': subscribers
         }
     )
 
 
 @login_required
-def subscribedPage(request, username):
-    user = get_object_or_404(User, username = username)
-    profile = user.profile
-    subscribed = profile.subscription.all()
+def subscribed_page(request, username):
+    """
+    Displays the subscribed page.
+
+    Returns:
+        HttpResponse: Renders the subscribed page.
+    """
+    User = get_user_model()
+    user = get_object_or_404(User, username=username)
+    user_profile = user.profile
+    subscribed = user_profile.subscription.all()
 
     return render(
         request,
         'profile/subscribed.html',
         {
-            'profile': profile,
+            'profile': user_profile,
             'subscribed': subscribed
         }
     )

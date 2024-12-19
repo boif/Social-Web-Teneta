@@ -1,9 +1,3 @@
-from django.conf import settings
-from django.conf.urls.static import static
-from django.urls import path
-from Profile import views, forms
-from django.contrib.auth.views import LoginView, LogoutView
-
 """
 This module defines the url patterns for the profile app.
 
@@ -16,6 +10,13 @@ Routes:
     - 'profile/<str:username>/unsubscribe/' : unsubscribe func.
 """
 
+from profile import views, forms
+
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import path
+from django.contrib.auth.views import LoginView, LogoutView
+
 urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('login/',
@@ -27,8 +28,8 @@ urlpatterns = [
          name='login'),
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('profile/<str:username>/', views.profile, name='profile'),
-    path('profile/<str:username>/subscribers/', views.subscribersPage, name='subscribers'),
-    path('profile/<str:username>/subscribed/', views.subscribedPage, name='subscribed'),
+    path('profile/<str:username>/subscribers/', views.subscribers_page, name='subscribers'),
+    path('profile/<str:username>/subscribed/', views.subscribed_page, name='subscribed'),
     path('subscribe/<str:username>/', views.subscribe, name='subscribe'),
     path('unsubscribe/<str:username>/', views.unsubscribe, name='unsubscribe'),
 ]

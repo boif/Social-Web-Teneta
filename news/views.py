@@ -1,23 +1,24 @@
-from django.shortcuts import render, redirect
-from django.views.generic import DetailView, UpdateView, DeleteView
-from news.models import *
-from news.forms import PostForm
-from django.http import JsonResponse
-from django.views.decorators.http import require_POST
-
 """
 This module defines the views for the news app.
 
-views:
-    - createPost
+Views:
+    - create_post
     - PostDetailView
     - PostUpdateView
     - PostDeleteView
-    - likePost
-    - addComment
+    - like_post
+    - comment_post
 """
 
-def createPost(request):
+from django.shortcuts import render, redirect
+from django.views.generic import DetailView, UpdateView, DeleteView
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
+
+from news.models import Post, Like, Comment  # Только необходимые импорты
+from news.forms import PostForm
+
+def create_post(request):
     """
     Handles the creation of a new post.
 
@@ -33,7 +34,7 @@ def createPost(request):
             return redirect('/')
     else:
         form = PostForm()
-    posts = Post.objects.all().order_by('-date')
+    posts = Post.objects.all().order_by('-date')  # pylint: disable=no-member
     return render(
         request,
         'home.html',
@@ -65,28 +66,28 @@ class PostDeleteView(DeleteView):
     success_url = '/'
 
 @require_POST
-def likePost(request, post_id):
+def like_post(request, post_id):
     """
     Handles liking and unliking the post.
 
     Returns:
         JsonResponse: Returns the updated number of likes for the post
     """
-    post = Post.objects.get(pk=post_id)
-    like, created = Like.objects.get_or_create(user=request.user, post=post)
+    post = Post.objects.get(pk=post_id)  # pylint: disable=no-member
+    like, created = Like.objects.get_or_create(user=request.user, post=post)  # pylint: disable=no-member
     if not created:
         like.delete()
     return JsonResponse({'likes': post.likes.count()})
 
 @require_POST
-def CommentPost(request, post_id):
+def comment_post(request, post_id):
     """
     Handles commenting on the post.
 
     Returns:
         JsonResponse: Indicates the comment was successfully added.
     """
-    post = Post.objects.get(pk=post_id)
+    post = Post.objects.get(pk=post_id)  # pylint: disable=no-member
     text = request.POST.get('text')
-    Comment.objects.create(user=request.user, post=post, text=text)
+    Comment.objects.create(user=request.user, post=post, text=text)  # pylint: disable=no-member
     return JsonResponse({'success': True})

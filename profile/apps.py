@@ -5,7 +5,7 @@ Django uses this configuration to set up and manage application-specific setting
 from django.apps import AppConfig
 
 
-class AppConfig(AppConfig):
+class ProfileConfig(AppConfig):
     """
     This class specifies the default primary key field type and the app name
     """
