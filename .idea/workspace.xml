@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="linting consumers.py">
+    <list default="true" id="61ac3760-ecee-444d-be29-b82e949867c1" name="Changes" comment="linting apps 1">
       <change afterPath="$PROJECT_DIR$/.pylintrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitlab-ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.gitlab-ci.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/models.py" afterDir="false" />
@@ -132,7 +133,7 @@
       <workItem from="1734506922913" duration="1431000" />
       <workItem from="1734520695946" duration="6431000" />
       <workItem from="1734536437767" duration="7410000" />
-      <workItem from="1734592819998" duration="8182000" />
+      <workItem from="1734592819998" duration="8530000" />
     </task>
     <task id="LOCAL-00001" summary="test gitlab mirror">
       <option name="closed" value="true" />
@@ -414,7 +415,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734552821815</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="linting apps 1">
+      <option name="closed" value="true" />
+      <created>1734601785535</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1734601785535</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -425,7 +434,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix docker-compose.yml, CI and masked ENV" />
     <MESSAGE value="CI docker username fix" />
     <MESSAGE value="test fix" />
     <MESSAGE value="test fix 2" />
@@ -450,6 +458,7 @@
     <MESSAGE value="linting 2" />
     <MESSAGE value="linting 3" />
     <MESSAGE value="linting consumers.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="linting consumers.py" />
+    <MESSAGE value="linting apps 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="linting apps 1" />
   </component>
 </project>
