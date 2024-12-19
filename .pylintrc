@@ -1,0 +1,42 @@
+[MASTER]
+# Загружаем плагин для работы с Django
+load-plugins=pylint_django
+django-settings-module=djangoProject.settings
+
+# Устанавливаем рабочую директорию
+init-hook='import sys; sys.path.append(".")'
+
+[MESSAGES CONTROL]
+# Отключаем ошибки, которые не имеют смысла для Django
+disable=
+    missing-docstring,          # Отключаем требование документировать все функции
+    no-member,                  # Pylint не всегда понимает Django ORM
+    invalid-name,               # Имена переменных, методов и функций могут быть специфичными для Django
+    too-few-public-methods,     # Для моделей или форм с небольшим количеством методов
+    useless-super-delegation    # Django часто требует вызов super()
+
+[FORMAT]
+# Настройки длины строк и отступов
+max-line-length=120
+indent-string='    '  # 4 пробела
+
+[TYPECHECK]
+# Игнорируем ошибки о "неизвестных членах" (актуально для моделей Django)
+ignored-classes=QuerySet,Manager
+
+[DESIGN]
+# Максимальная глубина вложенности кода
+max-branches=12
+max-attributes=15
+
+[LOGGING]
+# Разрешаем использовать print() (иногда полезно при отладке)
+disable=logging-fstring-interpolation,logging-format-interpolation
+
+[SIMILARITIES]
+# Отключаем проверку на дублирование кода (не всегда критично)
+min-similarity-lines=10
+
+[REPORTS]
+# Отключаем вывод сложных отчетов
+reports=no
